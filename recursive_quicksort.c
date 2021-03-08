@@ -12,10 +12,7 @@ void quicksort(node_t **list)
     while (p) {
         node_t *n = p;
         p = p->next;
-        list_add_node_t(n->value > value
-                            ? &right /* AAA */
-                            : &left  /* BBB */
-                        , n);
+        list_add_node_t(n->value > value ? &right : &left, n);
     }
 
     quicksort(&left);
@@ -23,6 +20,7 @@ void quicksort(node_t **list)
 
     node_t *result = NULL;
     list_concat(&result, left);
-    list_concat(&result, pivot); list_concat(&result, right); // CCC
+    list_concat(&result, pivot);
+	list_concat(&result, right);
     *list = result;
 }
