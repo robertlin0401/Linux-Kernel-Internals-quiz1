@@ -40,3 +40,10 @@ static void list_display(node_t *list) {
     printf("\n");
 }
 
+static node_t *list_make_node_t(node_t *list, int random) {
+	node_t *node_t = (node_t *)malloc(sizeof(node_t));
+	node_t->value = random;
+	list_add_node_t(&list, node_t);
+	return list;
+}
+

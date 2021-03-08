@@ -15,4 +15,6 @@ static bool list_is_order(node_t *);
 
 static void list_display(node_t *);
 
+static node_t *list_make_node_t(node_t *, int);
+
 #endif
