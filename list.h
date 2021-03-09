@@ -1,5 +1,5 @@
-#ifndef LIST.H
-#define LIST.H
+#ifndef LIST_H
+#define LIST_H
 #include <stdbool.h>
 
 typedef struct __node {                   
