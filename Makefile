@@ -1,9 +1,11 @@
 CC := gcc
-exe := test
+exe := random_test
 obj := list.o quicksort.o
 
-all: $(obj) $(exe).o
-	$(CC) -o $(exe) $^
+all: $(exe)
+
+$(exe): $(obj) $(exe).o
+	$(CC) -o $@ $^
 
 $(exe).o: $(exe).c
 	$(CC) -c $<
