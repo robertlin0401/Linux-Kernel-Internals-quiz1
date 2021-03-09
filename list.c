@@ -47,3 +47,11 @@ node_t *list_make_node_t(node_t *list, int random) {
 	return list;
 }
 
+void list_free(node_t **list) {
+	while (*list) {
+		node_t *n = (*list)->next;
+		free(*list);
+		list = &n;
+	}
+}
+

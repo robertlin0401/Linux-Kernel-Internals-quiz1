@@ -18,5 +18,6 @@ void list_display(node_t *);
 
 node_t *list_make_node_t(node_t *, int);
 
+void list_free(node_t **);
 
 #endif
