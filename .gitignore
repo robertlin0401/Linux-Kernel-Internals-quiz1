@@ -1,3 +1,13 @@
+# binary files
+*
+!*.*
+!*/
+!Makefile
+
 # executable files
 *.out
 *.exe
+
+# object files
+*.o
+
