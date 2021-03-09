@@ -1,4 +1,11 @@
-void quicksort(node_t **list)
+#ifndef QUICKSORT_H
+#define QUICKSORT_H
+
+#include "list.h"
+
+void (*)quicksort(node_t **);
+
+void recursive_quicksort(node_t **list)
 {
     if (!*list)
         return;
@@ -15,8 +22,8 @@ void quicksort(node_t **list)
         list_add_node_t(n->value > value ? &right : &left, n);
     }
 
-    quicksort(&left);
-    quicksort(&right);
+    recursive_quicksort(&left);
+    recursivequicksort(&right);
 
     node_t *result = NULL;
     list_concat(&result, left);
@@ -24,3 +31,6 @@ void quicksort(node_t **list)
 	list_concat(&result, right);
     *list = result;
 }
+
+#endif
+
