@@ -1,3 +1,9 @@
+#include <stdlib.h>
+#include "list.h"
+#include "quicksort.h"
+
+void (*quicksort)(node_t **) = recursive_quicksort;
+
 int main(int argc, char **argv) {
     size_t count = 20;
 
@@ -6,7 +12,7 @@ int main(int argc, char **argv) {
         list = list_make_node_t(list, random() % 1024);
 
     list_display(list);
-    quicksort(&list);
+    (*quicksort)(&list);
     list_display(list);
 
     if (!list_is_ordered(list))
@@ -15,3 +21,4 @@ int main(int argc, char **argv) {
     list_free(&list);
     return EXIT_SUCCESS;
 }
+

@@ -49,9 +49,9 @@ node_t *list_make_node_t(node_t *list, int random) {
 
 void list_free(node_t **list) {
 	while (*list) {
-		node_t *n = (*list)->next;
-		free(*list);
-		list = &n;
+		node_t *node_t = *list;
+		*list = node_t->next;
+		free(node_t);
 	}
 }
 
