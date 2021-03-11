@@ -21,5 +21,5 @@ optimized_random_test.o: optimized_random_test.c
 
 .PHONY: clean
 clean:
-	rm -rf $(obj) $(exe).o $(exe)
+	rm -rf $(obj) random_test.o optimized_random_test.o
 
