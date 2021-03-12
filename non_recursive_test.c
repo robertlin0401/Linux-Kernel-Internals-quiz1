@@ -4,7 +4,7 @@
 #include "list.h"
 #include "quicksort.h"
 
-void (*quicksort)(node_t **, int) = recursive_quicksort;
+void (*quicksort)(node_t **, int) = non_recursive_quicksort;
 
 int main(int argc, char **argv) {
     size_t count = 20;

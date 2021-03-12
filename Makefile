@@ -1,5 +1,5 @@
 CC := gcc
-exe := random_test optimized_random_test
+exe := random_test optimized_random_test non_recursive_test
 obj := list.o quicksort.o
 
 all: $(exe)
@@ -14,6 +14,12 @@ optimized_random_test: $(obj) optimized_random_test.o
 	$(CC) -o $@ $^
 
 optimized_random_test.o: optimized_random_test.c
+	$(CC) -c $<
+
+non_recursive_test: $(obj) non_recursive_test.o
+	$(CC) -o $@ $^
+
+non_recursive_test.o: non_recursive_test.c
 	$(CC) -c $<
 
 %.o: %.c %.h
