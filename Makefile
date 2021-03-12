@@ -16,6 +16,12 @@ optimized_random_test: $(obj) optimized_random_test.o
 optimized_random_test.o: optimized_random_test.c
 	$(CC) -c $<
 
+non_recursive_test: $(obj) non_recursive_test.o
+	$(CC) -o $@ $^
+
+non_recursive_test.o: non_recursive_test.c
+	$(CC) -c $<
+
 %.o: %.c %.h
 	$(CC) -c $<
 
