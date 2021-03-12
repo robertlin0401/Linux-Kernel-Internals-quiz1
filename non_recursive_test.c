@@ -13,6 +13,7 @@ int main(int argc, char **argv) {
 	int result = getrandom(seed, sizeof(int), GRND_RANDOM | GRND_NONBLOCK);
 	if (result == -1) *seed = result;
 	srandom(*seed);
+	free(seed);
 
     node_t *list = NULL;
     while (count--)
@@ -22,7 +23,6 @@ int main(int argc, char **argv) {
     (*quicksort)(&list, elements);
     list_display(list);
 
-	free(seed);
     if (!list_is_ordered(list))
         return EXIT_FAILURE;
 

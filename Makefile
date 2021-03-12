@@ -1,5 +1,5 @@
 CC := gcc
-exe := random_test optimized_random_test
+exe := random_test optimized_random_test non_recursive_test
 obj := list.o quicksort.o
 
 all: $(exe)
