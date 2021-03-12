@@ -1,7 +1,7 @@
 #include <stddef.h>
 #include "quicksort.h"
 
-void recursive_quicksort(node_t **list)
+void recursive_quicksort(node_t **list, int elements)
 {
     if (!*list)
         return;
@@ -18,8 +18,8 @@ void recursive_quicksort(node_t **list)
         list_add_node_t(n->value > value ? &right : &left, n);
     }
 
-    recursive_quicksort(&left);
-    recursive_quicksort(&right);
+    recursive_quicksort(&left, 0);
+    recursive_quicksort(&right, 0);
 
     node_t *result = NULL;
     list_concat(&result, left);
@@ -28,3 +28,7 @@ void recursive_quicksort(node_t **list)
     *list = result;
 }
 
+void non_recursive_quicksort(node_t **list, int elements)
+{
+	
+}

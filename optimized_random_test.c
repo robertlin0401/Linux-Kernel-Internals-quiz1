@@ -4,10 +4,11 @@
 #include "list.h"
 #include "quicksort.h"
 
-void (*quicksort)(node_t **) = recursive_quicksort;
+void (*quicksort)(node_t **, int) = recursive_quicksort;
 
 int main(int argc, char **argv) {
     size_t count = 20;
+	const size_t elements = count;
 	int *seed = (int *)malloc(sizeof(int));
 	int result = getrandom(seed, sizeof(int), GRND_RANDOM | GRND_NONBLOCK);
 	if (result == -1) *seed = result;
@@ -19,7 +20,7 @@ int main(int argc, char **argv) {
         list = list_make_node_t(list, random() % 1024);
 
     list_display(list);
-    (*quicksort)(&list);
+    (*quicksort)(&list, elements);
     list_display(list);
 
     if (!list_is_ordered(list))

@@ -3,7 +3,9 @@
 
 #include "list.h"
 
-void recursive_quicksort(node_t **);
+void recursive_quicksort(node_t **, int);
+
+void non_recursive_quicksort(node_t **, int);
 
 #endif
 
