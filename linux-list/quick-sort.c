@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "list.h"
@@ -9,10 +10,11 @@ static uint16_t values[256];
 
 static bool isValid(struct list_head *head, struct list_head *L, struct list_head *R)
 {
+	if (L == R->next) return false;
     while (1) {
-        if (L == R) return true;
-        if (L == head) return false;
         L = L->next;
+        if (L == R)	return true;
+        if (L == head) return false;
     }
 }
 
@@ -35,7 +37,7 @@ static void SWAP(struct list_head **a, struct list_head **b)
 }
 
 static void list_qsort(struct list_head *head)
-{
+{	
     #define MAX_LEVELS 300
     #define isValid() isValid(head, L, R)
     #define valueOf(node) list_entry(node, struct listitem, list)->i
@@ -57,7 +59,7 @@ static void list_qsort(struct list_head *head)
                 while (valueOf(R) >= valueOf(pivot) && isValid()) R = R->prev;
                 if (isValid()) {
                     struct list_head *target = R;
-                    R = R->next;
+                    R = R->prev;
                     list_move(target, L);
                     L = L->next;
                 }
@@ -65,15 +67,23 @@ static void list_qsort(struct list_head *head)
                 if (isValid()) {
                     struct list_head *target = L;
                     L = L->prev;
-                    list_move_tail(target, R);
-                    R = R->prev;
+                    list_move(target, R);
                 }
             }
-            end[iter+1] = end[iter];
-            end[iter++] = L;
-            L = L->next;
-            list_move_tail(pivot, L);
-            begin[iter+1] = L;
+			begin[iter] = pivot->next;
+			if (valueOf(L) >= valueOf(pivot)) {
+				if (L != pivot) {
+					begin[iter+1] = L;
+					list_move_tail(pivot, L);
+				} else {
+					begin[iter+1] = L->next;
+				}
+			} else {
+				begin[iter+1] = L->next;
+				list_move(pivot, L);
+			}
+			end[iter+1] = end[iter];
+			end[iter++] = pivot;
             if (list_offset(head, begin[iter], end[iter]) > list_offset(head, begin[iter-1], end[iter-1])) {
                 SWAP(&begin[iter], &begin[iter-1]);
                 SWAP(&end[iter], &end[iter-1]);
