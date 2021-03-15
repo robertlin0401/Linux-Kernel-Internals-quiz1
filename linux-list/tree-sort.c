@@ -17,8 +17,9 @@ static inline void inorder_traversal(struct list_head *root, struct list_head *h
 {
     if (root != NULL) {
         inorder_traversal(root->prev, head);
+		struct list_head *next = root->next;
         list_add_tail(root, head);
-        inorder_traversal(root->next, head);
+        inorder_traversal(next, head);
     }
 }
 
