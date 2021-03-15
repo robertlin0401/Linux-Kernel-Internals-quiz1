@@ -7,9 +7,56 @@
 
 static uint16_t values[256];
 
+static inline void set_leaf(struct list_head *leaf)
+{
+    leaf->prev = NULL;
+    leaf->next = NULL;
+}
+
+static inline void inorder_traversal(struct list_head *root, struct list_head *head)
+{
+    if (root != NULL) {
+        inorder_traversal(root->prev, head);
+        list_add_tail(root, head);
+        inorder_traversal(root->next, head);
+    }
+}
+
 static void list_tsort(struct list_head *head)
 {	
+    #define valueOf(node) list_entry(node, struct listitem, list)->i
+
+    if (list_empty(head) || list_is_singular(head))
+        return;
     
+    struct list_head *root = head->next;
+    list_del(root);
+    set_leaf(root);
+    while (!list_empty(head)) {
+        struct list_head *target = head->next;
+        list_del(target);
+        set_leaf(target);
+        struct list_head *position = root;
+        while (1) {
+            if (valueOf(target) <= valueOf(position)) {
+                if (position->prev != NULL)
+                    position = position->prev;
+                else {
+                    position->prev = target;
+                    break;
+                }
+            } else {
+                if (position->next != NULL)
+                    position = position->next;
+                else {
+                    position->next = target;
+                    break;
+                }
+            }
+        }
+    }
+
+    inorder_traversal(root, head);
 }
 
 int main(void)
